@@ -7,6 +7,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Menu() {
+    // `useState` などの UI 操作によって状態を更新したい場合は Client Side Component として実装する必要がある.
     const [isOpen, setOpen] = useState(false);
 
     return (
