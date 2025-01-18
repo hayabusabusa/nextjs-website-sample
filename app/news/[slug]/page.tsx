@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
 import Article from "@/app/_components/Article";
@@ -12,7 +13,8 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-    const data = await getNewsDetail(params.slug);
+    // データが取得できない無効な ID だった場合は not found ページを表示する.
+    const data = await getNewsDetail(params.slug).catch(notFound);
 
     return (
         <>
