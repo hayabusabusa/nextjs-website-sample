@@ -6,9 +6,14 @@ import { NEWS_LIST_LIMIT } from "@/app/_constants";
 type Props = {
     totalCount: number;
     current?: number;
+    basePath?: string;
 };
 
-export default function Pagination({ totalCount, current = 1 }: Props) {
+export default function Pagination({
+    totalCount, 
+    current = 1,
+    basePath = "/news",
+}: Props) {
     // ページ番号一覧を作成する.
     const pages = Array.from(
         {
@@ -24,7 +29,7 @@ export default function Pagination({ totalCount, current = 1 }: Props) {
                     <li className={styles.list} key={p}>
                         {current !== p 
                             ? (
-                                <Link href={`/news/p/${p}`} className={styles.item}>
+                                <Link href={`${basePath}/p/${p}`} className={styles.item}>
                                     {p}
                                 </Link>
                             ) 
