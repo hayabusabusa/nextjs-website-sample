@@ -15,6 +15,9 @@ type Props = {
     },
 };
 
+// 元々 SSR だったが、キャッシュの保持期間を 0 にして常に最新を取得するようにする.
+export const revalidate = 0;
+
 export default async function Page({ params, searchParams }: Props) {
     // データが取得できない無効な ID だった場合は not found ページを表示する.
     const data = await getNewsDetail(params.slug, {

@@ -4,6 +4,9 @@ import NewsList from "@/app/_components/NewsList";
 import SearchField from "@/app/_components/SearchField";
 import Pagination from "@/app/_components/Pagination";
 
+// SSR するためキャッシュを利用しない設定にする
+export const revalidate = 0;
+
 export default async function Page() {
     const { contents: news, totalCount } = await getNewsList({
         limit: NEWS_LIST_LIMIT,
