@@ -4,8 +4,8 @@ import NewsList from "@/app/_components/NewsList";
 import SearchField from "@/app/_components/SearchField";
 import Pagination from "@/app/_components/Pagination";
 
-// SSR するためキャッシュを利用しない設定にする
-export const revalidate = 0;
+// ISR するためキャッシュの保持期間を 60 sec に設定する.
+export const revalidate = 60;
 
 export default async function Page() {
     const { contents: news, totalCount } = await getNewsList({
