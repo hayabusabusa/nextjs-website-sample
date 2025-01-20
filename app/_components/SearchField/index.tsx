@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { Suspense } from "react";
 import styles from "./index.module.css";
 
-export default function SearchField() {
+function SearchFieldComponent() {
     // ユーザーのアクションから遷移を行いたいため `useRouter` を使用する.
     const router = useRouter();
+    // URL のクエリパラメーターを利用するため `useSearchParams` を使用する.
+    const searchParams = useSearchParams();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         // デフォルトの指定された URL へフォームの内容を送る動作をキャンセルする.
@@ -36,10 +39,21 @@ export default function SearchField() {
                 <input
                     type="text"
                     name="q"
+                    defaultValue={searchParams.get("q") ?? undefined}
                     placeholder="キーワードを入力"
                     className={styles.searchInput}
                 />
             </label>
         </form>
+    );
+}
+
+export default function SearchField() {
+    // `useSearchParams` を利用するとこのコンポーネントを利用した箇所もクライアントコンポーネントになってしまうため
+    // このコンポーネントのみをクライアントコンポーネントにするため `Suspense` でラップする.
+    return (
+        <Suspense>
+            <SearchFieldComponent />
+        </Suspense>
     );
 }
