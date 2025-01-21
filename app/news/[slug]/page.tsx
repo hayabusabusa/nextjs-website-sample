@@ -15,9 +15,6 @@ type Props = {
     },
 };
 
-// 元々 SSR だったが、ISR するためキャッシュの保持期間を 60 sec に設定する.
-export const revalidate = 60;
-
 export default async function Page({ params, searchParams }: Props) {
     // データが取得できない無効な ID だった場合は not found ページを表示する.
     const data = await getNewsDetail(params.slug, {

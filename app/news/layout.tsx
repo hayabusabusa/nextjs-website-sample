@@ -7,6 +7,9 @@ type Props = {
     children: React.ReactNode;
 };
 
+// ニュース関連のページは全て ISR でキャッシュの有効期間を 60 sec に設定する.
+export const revalidate = 60;
+
 export default function NewsLayout({ children }: Props) {
     return (
         <>

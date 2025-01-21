@@ -6,6 +6,9 @@ import { TOP_NEWS_LIMIT } from "@/app/_constants";
 import NewsList from "@/app/_components/NewsList";
 import { getNewsList } from "@/app/_libs/microcms";
 
+// ISR するためにキャッシュの保持期間を 60 sec に設定する.
+export const revalidate = 60;
+
 export default async function Home() {
   const data = await getNewsList({
     limit: TOP_NEWS_LIMIT,
