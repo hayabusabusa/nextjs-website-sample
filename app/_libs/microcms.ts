@@ -69,10 +69,16 @@ export const getCategoryDetail = async (
     contentId: string,
     queries?: MicroCMSQueries,
 ) => {
+    // プレビュー機能を利用している場合はキャッシュの有効期限を 0 にしてキャッシュを利用しないようにする.
     const detailData = await client.getListDetail<Category>({
         endpoint: "categories",
         contentId,
         queries,
+        customRequestInit: {
+            next: {
+                revalidate: queries?.draftKey == undefined ? 60 : 0
+            },
+        },
     });
     return detailData;
 };
